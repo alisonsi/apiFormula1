@@ -1,0 +1,42 @@
+<html>  
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/service.js" type="text/javascript"></script>
+</head>    
+<body>
+    <header class="cabecalho">
+        
+    </header>
+    
+    <div class="content">
+        <ul class="selecaoCorrida">
+            <li>Temporada/Ano
+               <!-- <input type="number" min="1950" max="2017" value="1950"> -->
+               <select id="ano" autofocus class="drop-down-ano" onchange="{selecionarCorrida(),buscarCorridas()}"></select>            
+            </li>            
+            <li>Corrida/Rodada
+                <select id="corrida" class="drop-down-corrida" ></select>
+            </li>
+            <li>
+                <button type="button" onclick="{buscarCorridas(),selecionarCorrida()}">Buscar</button>
+            </li>
+        </ul>
+        <div>  
+            <ul class="informacoes">                
+            </ul>
+        </div>
+        <table class="cabecalhoTabela">
+            <th>Posição</th>
+            <th>Nome</th>
+            <th>Equipe</th>
+            <th>Tempo</th>   
+        </table>    
+        <table class="tabelaCorridas" id="tabelaCorridas">
+                  
+        </table>
+    </div>
+    
+</body>
+    <script src="js/utils.js" type="text/javascript"></script>
+
+</html>
