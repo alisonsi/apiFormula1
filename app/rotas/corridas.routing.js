@@ -5,7 +5,7 @@ module.exports = function(app){
     app.
     use(cors()).
     //Retorna o usuario de um determinado post
-    get("/api/corridas/temporada/ano", controllerCorridas.buscarTemporadaECorridas)
-
+    get("/api/corridas/:ano/:corrida", controllerCorridas.buscarTemporadaECorridas).
+    get("/api/temporada/:ano/:corrida",controllerCorridas.buscarTemporada)
 }
 

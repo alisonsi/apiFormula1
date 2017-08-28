@@ -41,8 +41,6 @@ function selecionarCorrida(){
             <li><strong>Pais: </strong>${temporada.pais}</li>
             <li><strong>Estado: </strong>${temporada.estado}</li>
             `
-            
-            
         })
         .catch(function(error){
             console.log(error);
