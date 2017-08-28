@@ -6,4 +6,4 @@
 # apiFormula1
 # Node JS
 # Express
-# front-end JavaScript
+# Front-end HTML, CSS e JavaScript
