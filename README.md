@@ -2,4 +2,7 @@
 # EndPoints sendo consumidos
 * http://ergast.com/api/f1/2012
 * http://ergast.com/api/f1/2008/5/results
-# Front-end HTML, CSS e JavaScript
+# Front-end 
+* HTML
+* CSS
+* JavaScript
