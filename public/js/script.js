@@ -1,8 +1,10 @@
 
+let totalDeCorridas = "";
+const infomacoesEvento="" ;
 function buscarCorridas(){
+
     let  ano = document.querySelector("#ano").value;
     let corrida = document.querySelector("#corrida").value;
-    
 
     const url = `http://localhost:3000/api/corridas/${ano}/${corrida}` ;
     const methods = {
@@ -21,6 +23,7 @@ function buscarCorridas(){
 function buscar(){
     buscarTemporada();
     buscarCorridas();
+    console.log(totalDeCorridas)
 
 }
 function buscarTemporada(){
@@ -35,9 +38,14 @@ function buscarTemporada(){
         .then(function(response){
             return response.json();
         })
-        .then(function(data){                        
-            renderizarTemporada(data)
-            criarDropDownCorrida(1,data.totalCorridas)
+        .then(function(data){  
+            console.log(data)                      
+            totalDeCorridas = data.totalCorridas;
+            infomacoesEvento = data;
+            renderizarTemporada(data);
+
+            return data;
+            
         })
         .catch(function(error){
             console.log(error);
@@ -63,6 +71,8 @@ function renderizarCorridas(classificacaoCorrida){
 }
 
 function renderizarTemporada(temporada){
+    console.log("dados")
+    console.log(infomacoesEvento)
     const informacoes = document.querySelector(".informacoes");
     
                 informacoes.innerHTML = `
@@ -79,7 +89,6 @@ function alterarDropdownCorrida(){
 }
 function criarDropDowns(){
     criarDropDownAno(1950,2017);
-
     criarDropDownCorrida(1,9)
 };
 function criarDropDownAno(min, max){
@@ -90,11 +99,11 @@ function criarDropDownAno(min, max){
 function criarDropDownCorrida(min, max){
     let dropDownCorrida = document.querySelector(".drop-down-corrida");
     let dropDownCorridaSave = dropDownCorrida.value;
+
     dropDownCorrida.innerHTML = dropDown(min,max)
     console.log(dropDownCorridaSave)
     dropDownCorrida.options[dropDownCorridaSave-1].selected = true;
 }
-
 function dropDown(inicio, fim){
     var myDropDown=" ";
     for (var index = inicio; index <= fim; index++) {
