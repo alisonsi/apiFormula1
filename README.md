@@ -4,6 +4,4 @@
 * http://ergast.com/api/f1/2008/5/results
 	
 # apiFormula1
-# Node JS
-# Express
 # Front-end HTML, CSS e JavaScript
