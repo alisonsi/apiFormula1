@@ -2,7 +2,7 @@
 É buscado o total de temporadas para criar o dropdown ano
 Em seguida é chamado as funções para recuperar as informações sobre o evento em si
 e informações sobre a corrida*/
-(function buscarTotalTemporadas(){
+function buscarTotalTemporadas(){
     
     const url = `http://ergast.com/api/f1/seasons.json?limit=68` ;
     const methods = {
@@ -20,13 +20,35 @@ e informações sobre a corrida*/
         
         totalTemporadas = 
         {   anoInicial: data.MRData.SeasonTable.Seasons[0].season,
-            anoFinal: data.MRData.SeasonTable.Seasons[tamanho-1].season
+            anoFinal: data.MRData.SeasonTable.Seasons[tamanho-1].season,
         }
         criarDropDownAno(totalTemporadas.anoInicial,totalTemporadas.anoFinal);
         buscarCorridasInformacoes(totalTemporadas.anoInicial,1);
         buscarTempordaInformacoes(totalTemporadas.anoInicial,1);
+        descricaoTemporada(totalTemporadas.anoInicial);
     })
-})();
+};
+
+function descricaoTemporada(ano){
+    const url = `http://ergast.com/api/f1/seasons.json?limit=68` ;
+    const methods = {
+        methods:'GET'
+    }
+    const request = new Request(url,methods);
+
+    fetch(request)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){ 
+        let uri = data.MRData.SeasonTable.Seasons;
+        
+        var descricao = uri.filter(function isBigEnough(value) {
+            return value.season == ano;
+          });
+          renderizarDescricao(descricao[0].url);
+    })
+};
 
 //ao clicar no butão buscar essa função é chamada
 function solicitarBuscarCorridaInfo(){
@@ -93,6 +115,13 @@ function buscarTempordaInformacoes(ano,corrida){
             console.log(error);
         })
 }
+function renderizarDescricao(descricao){
+    
+    const listaCorridas = document.querySelector(".descricao");
+    listaCorridas.innerHTML = `<strong>História sobre essa corrida:</strong>${descricao}`
+    
+}
+
 function renderizarCorridas(classificacaoCorrida){
     
     const listaCorridas = document.querySelector("#tabelaCorridas");
@@ -152,3 +181,4 @@ function dropDown(inicio, fim){
     }
     return myDropDown;
 }
+criarDropDownAno(1950,2017);

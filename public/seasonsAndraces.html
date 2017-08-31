@@ -1,0 +1,58 @@
+<html>  
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="utils/utils.js"></script>
+
+</head>    
+<body>
+        <header class="cabecalho" id="includedContent"></header>     
+        
+    <div class="content">
+            <div class="animacao" >
+                    <div class="rua">
+                        <img src="../img/rua.png" alt="" width="400" height="400">
+                    </div>
+                    <div class="carro">
+                        <img src="../img/carro.png" alt="">
+                    </div>
+                    
+                </div>
+
+        <ul class="selecaoCorrida">
+            <li>Temporada/Ano
+               <!-- <input type="number" min="1950" max="2017" value="1950"> -->
+               <select id="ano" autofocus class="drop-down-ano" onchange="criarDropDownCorrida(this.value)"></select>            
+            </li>            
+            <li>Corrida/Rodada
+                <select id="corrida" class="drop-down-corrida" ></select>
+            </li>
+            <li>
+                <button type="button" onclick="solicitarBuscarCorridaInfo()">Buscar</button>
+            </li>
+        </ul>
+        <div>  
+            <ul class="informacoes">                
+            </ul>
+            <p class="descricao"></p>
+
+        </div>
+        <table class="cabecalhoTabela">
+            <th>Posição</th>
+            <th>Nome</th>
+            <th>Equipe</th>
+            <th>Tempo</th>   
+        </table>    
+        <table class="tabelaCorridas" id="tabelaCorridas">
+                  
+        </table>
+    </div>
+    
+</body>
+
+<script src="../js/services.js" type="text/javascript"></script>
+
+</html>
