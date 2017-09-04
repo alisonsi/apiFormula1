@@ -24,7 +24,7 @@ function buscarTotalTemporadas(){
         }
         criarDropDownAno(totalTemporadas.anoInicial,totalTemporadas.anoFinal);
         buscarCorridasInformacoes(totalTemporadas.anoInicial,1);
-        buscarTempordaInformacoes(totalTemporadas.anoInicial,1);
+        buscarTemporadaInformacoes(totalTemporadas.anoInicial,1);
         descricaoTemporada(totalTemporadas.anoInicial);
     })
 };
@@ -56,7 +56,7 @@ function solicitarBuscarCorridaInfo(){
     let corrida = document.querySelector("#corrida").value;
 
     buscarCorridasInformacoes(ano, corrida);
-    buscarTempordaInformacoes(ano,corrida);
+    buscarTemporadaInformacoes(ano,corrida);
 }
 function buscarCorridasInformacoes(ano,corrida){
     
@@ -84,7 +84,7 @@ function buscarCorridasInformacoes(ano,corrida){
         renderizarCorridas(classificacao)
     })
 }
-function buscarTempordaInformacoes(ano,corrida){
+function buscarTemporadaInformacoes(ano,corrida){
     const url = `http://ergast.com/api/f1/${ano}.json` ;
     const methods = {
         methods:'GET'
@@ -115,6 +115,7 @@ function buscarTempordaInformacoes(ano,corrida){
             console.log(error);
         })
 }
+
 function renderizarDescricao(descricao){
     
     const listaCorridas = document.querySelector(".descricao");
@@ -123,26 +124,62 @@ function renderizarDescricao(descricao){
 }
 
 function renderizarCorridas(classificacaoCorrida){
-    
+    var tabela = "";
     const listaCorridas = document.querySelector("#tabelaCorridas");
     listaCorridas.innerHTML = "";
     for(var i=0;i<3;i++){    
-        tabela = `
-                    <tr>
+        tabela += `
+                    <tr >
                     <td>${classificacaoCorrida[i].posicao}</td>    
                     <td>${classificacaoCorrida[i].nome}</td>
                     <td>${classificacaoCorrida[i].equipe}</td>    
                     <td>${classificacaoCorrida[i].tempo.time}</td>
                     </tr>
+                    
         `
+        // class="lista" onclick="mostrar(this)"
         //listaCorridas.insertAdjacentHTML("beforeend",tabela);
-        listaCorridas.innerHTML += tabela;
+        
     }
+    //adionar um ouvinte para o clice em uma linha    
+    // listaCorridas.addEventListener("click", mostrar(this));
+    listaCorridas.innerHTML = tabela;
+    
     
 }
+
+// function mostrar(evento){ 
+    
+            
+//     let corredorInfo = document.querySelector(".corredorInfo")
+//     let ano = document.querySelector("#ano").value;
+//     let corrida = document.querySelector("#corrida").value;
+//     let nome = evento.getElementsByTagName('td');
+    
+//     const url = `http://ergast.com/api/f1/${ano}/drivers/${nome[1].innerHTML}/status.json` ;
+//     const methods = {
+//         methods:'GET'
+//     }
+//     const request = new Request(url,methods);
+
+//     fetch(request)
+//         .then(function(response){
+//             return response.json();
+//         })
+//         .then(function(data){
+//     console.log(data)
+//             let text = `<h2>${data}</h2> `
+//             corredorInfo.innerHTML = text;
+//             corredorInfo.style.display = "block";
+//         })
+// }
+
+
 function renderizarTemporada(temporada){
     const informacoes = document.querySelector(".informacoes");
-    
+    const buttoBuscarClassificacao = document.getElementById("myButtoClassification")
+    console.log(buttoBuscarClassificacao)
+    buttoBuscarClassificacao.disabled = false;
                 informacoes.innerHTML = `
                 <li><strong>Circuito: </strong> ${temporada.nomeCircuito}</li>
                 <li><strong>Data: </strong>${temporada.data}</li>
@@ -182,3 +219,10 @@ function dropDown(inicio, fim){
     return myDropDown;
 }
 criarDropDownAno(1950,2017);
+
+function redirectClassification(){
+    let  ano = document.querySelector("#ano").value; 
+       
+    localStorage.setItem("ano",ano)
+    window.location = "http://localhost:3000/classification.html";
+}

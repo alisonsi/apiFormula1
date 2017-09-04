@@ -10,11 +10,13 @@ body{
     background-image: url("../img/f1.jpg");    
 }
 .cabecalhoTabela{
+    table-layout: fixed;
     width: 100%;
     margin: 10px;
     border-collapse: collapse;
 }
 .tabelaCorridas{
+    table-layout:fixed;
     margin: 10px;    
     border-collapse: collapse;
     width: 100%;
@@ -28,6 +30,7 @@ td,th{
     width: 20%;
 }
 td{
+    overflow: hidden;
     cursor: pointer;
 }
 
@@ -113,4 +116,6 @@ ul,.descricao{
     border:none; 
     padding:0;
     margin:0
+}
+.corredorInfo{
 }
